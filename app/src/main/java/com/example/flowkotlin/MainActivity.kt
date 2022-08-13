@@ -3,10 +3,14 @@ package com.example.flowkotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
-import com.example.flowkotlin.common.Resource
+import androidx.compose.runtime.collectAsState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,30 +23,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        btn_get_list.setOnClickListener {
+        CoroutineScope(Main).launch {
 
+            mainViewModel.countDownFlow.collectLatest {
 
-            mainViewModel.getEmployee()
-            val getItemLiveData = mainViewModel.getListLiveData
-            getItemLiveData.observe(this) {
-
-                if(it !=null){
-                    if (it.status == Resource.Status.SUCCESS) {
-
-                        val result = it.data?.get(0)?.title
-                        txt.text = result
-                        getItemLiveData.removeObservers(this)
-                        mainViewModel.onUserClear()  // to prevent looping
-
-                    } else if (it.status == Resource.Status.ERROR) {
-                        txt.text = it.message
-
-                    } else if (it.status == Resource.Status.LOADING) {
-                        txt.text = "loading..."
-                    }
-                }
-
+                txt.text = it.toString()
             }
+
         }
+
+
     }
 }

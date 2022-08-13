@@ -9,15 +9,10 @@
     tools:context=".MainActivity">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_get_list"
-        android:text="btn_get_List"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        tools:text="11"
         android:id="@+id/txt"
         android:textSize="20sp"
         android:textColor="#C60303"

@@ -1,52 +1,59 @@
 package com.example.flowkotlin
 
+
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.flowkotlin.common.Resource
-import com.example.flowkotlin.model.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel(){
+class MainViewModel @Inject constructor(): ViewModel(){
 
 
-//    private val _foo = MutableLiveData<Resource<List<UserModel>>>()
-//    val foo: LiveData<Resource<List<UserModel>>> get() = _foo
 
-    val getListLiveData: MutableLiveData<Resource<List<UserModel>>> = MutableLiveData<Resource<List<UserModel>>>()
+    var countDownFlow = flow<Int> {
+
+        val startingValue = 10
+        var currentValue = startingValue
+
+        emit(currentValue)
+        while (currentValue >0){
+
+            delay(1000L)
+            currentValue--
+            emit(currentValue)
+        }
+    }
 
 
-    fun getEmployee() {
 
-        mainRepository.getUserList().onEach { result ->
 
-            Log.i("TAG", "getCoins: ")
+    init {
+        collectFlow()
+    }
 
-            when (result.status) {
-                Resource.Status.LOADING -> {
-                    getListLiveData.value = Resource.Loading()
-                }
-                Resource.Status.SUCCESS -> {
-                    getListLiveData.value = Resource.Success(result.data)
-                }
-                Resource.Status.ERROR -> {
-                    getListLiveData.value = Resource.Error( result.message+"  error occured!!!")
-                }
+    //for collect in viewModel
+    private fun collectFlow(){
+        viewModelScope.launch {
+            countDownFlow.collect{
+                Log.i("Time", "Time is ${it.toString()}")
             }
-
-        }.launchIn(viewModelScope)
-
+        }
     }
 
-
-    fun onUserClear(){
-        getListLiveData.value = null
-    }
+     //collectLatest canceled the old one
+//    private fun collectFlow(){
+//        viewModelScope.launch {
+//            countDownFlow.collectLatest{
+//                delay(1500L)
+//                Log.i("Time", "Time is ${it.toString()}")
+//            }
+//        }
+//    }
 
 }
