@@ -24,14 +24,18 @@ class MainActivity : AppCompatActivity() {
 
 
         CoroutineScope(Main).launch {
-
-            mainViewModel.countDownFlow.collectLatest {
-
+            mainViewModel.countDownFlow.collect {
                 txt.text = it.toString()
             }
-
         }
 
+
+        // filter operation
+//        CoroutineScope(Main).launch {
+//            mainViewModel.countDownFlow.collect {
+//                txt.text = it.toString()
+//            }
+//        }
 
     }
 }
