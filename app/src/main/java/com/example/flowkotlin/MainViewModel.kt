@@ -297,4 +297,16 @@ class MainViewModel @Inject constructor() : ViewModel() {
 //        }
 //    }
 
+
+
+
+    /******************************************** state flow 3 ***************************************/
+
+    private val _stateFlow = MutableStateFlow(0)   // 0 is initial value
+    val stateFlow = _stateFlow.asStateFlow()
+
+
+    fun incrementCounter(){
+        _stateFlow.value += 1
+    }
 }

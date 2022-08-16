@@ -18,4 +18,19 @@
         android:textColor="#C60303"
         android:layout_marginTop="20dp" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_stateflow"
+        android:text="btn stateflow"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="txt state flow"
+        android:id="@+id/txt_stateflow"
+        android:textSize="20sp"
+        android:textColor="#C60303"
+        android:layout_marginTop="20dp" />
+
+
 </LinearLayout>

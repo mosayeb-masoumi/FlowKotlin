@@ -30,12 +30,22 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // filter operation
-//        CoroutineScope(Main).launch {
-//            mainViewModel.countDownFlow.collect {
-//                txt.text = it.toString()
-//            }
-//        }
+
+
+
+       /*********************** stateFlow ************************/
+        //statFlow prevent loosing data when screen orientaion happen
+        CoroutineScope(Main).launch {
+            mainViewModel.stateFlow.collect {
+                txt_stateflow.text = it.toString()
+            }
+        }
+
+        btn_stateflow.setOnClickListener {
+            mainViewModel.incrementCounter()
+        }
+
+
 
     }
 }
