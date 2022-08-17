@@ -1,4 +1,4 @@
-package com.example.flowkotlin
+package com.example.flowkotlin.flow_operators
 
 
 import android.util.Log
@@ -10,8 +10,9 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+//@HiltViewModel
+//class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel : ViewModel() {
 
 
     var countDownFlow = flow<Int> {
