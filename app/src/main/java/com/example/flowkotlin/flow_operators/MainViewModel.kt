@@ -34,7 +34,7 @@ class MainViewModel : ViewModel() {
         collectFlow()
     }
 
-    //for collect in viewModel
+//    for collect in viewModel
 //    private fun collectFlow(){
 //        viewModelScope.launch {
 //            countDownFlow.collect{
@@ -56,27 +56,27 @@ class MainViewModel : ViewModel() {
 
     /**** operator 1 & 2 ***/
     /************************** filter and map operators *************************/
-//    private fun collectFlow() {
-//        viewModelScope.launch {
-//            countDownFlow
-//                .filter { time ->
-//                    time % 2 == 0   // just collect even digits
-//                }
-//                .map { time ->
-//
-//                    time*2       // do an operation on even digits
-//                }
-//
-//                .onEach { time ->
-//
-//                    Log.i("Time onEach", "Time is $time")  //.onEach is the same as .collect
-//                }
-//
-//                .collect { time ->
-//                    Log.i("Time collect", "Time is $time")
-//                }
-//        }
-//    }
+    private fun collectFlow() {
+        viewModelScope.launch {
+            countDownFlow
+                .filter { time ->
+                    time % 2 == 0   // just collect even digits
+                }
+                .map { time ->
+
+                    time*2       // do an operation on even digits
+                }
+
+                .onEach { time ->
+
+                    Log.i("Time onEach", "Time is $time")  //.onEach is the same as .collect
+                }
+
+                .collect { time ->
+                    Log.i("Time collect", "Time is $time")
+                }
+        }
+    }
 
 
     /************************** these 2 below are the same *************************/
@@ -245,28 +245,28 @@ class MainViewModel : ViewModel() {
     /******************************************** example 2 ***************************************/
     /**  in this example we used buffer operator , buffer don't hold the emit to be collected then emit the second one
      * all emits will be emitted without any notice of former emit collected or no   speed is more than former example*/
-    private fun collectFlow() {
-
-        val flow = flow {
-            delay(250L)
-            emit("Appetizer")
-            delay(1000L)
-            emit("Main Dish")
-            delay(100L)
-            emit("Dessert")
-        }
-        viewModelScope.launch {
-            flow.onEach {
-                println("FLOW: $it is delivered")
-            }.buffer()
-                .collect {
-                    println("FLOW: now eating $it")
-                    delay(1500L)
-                    println("FLOW: finish eating $it")
-                }
-
-        }
-    }
+//    private fun collectFlow() {
+//
+//        val flow = flow {
+//            delay(250L)
+//            emit("Appetizer")
+//            delay(1000L)
+//            emit("Main Dish")
+//            delay(100L)
+//            emit("Dessert")
+//        }
+//        viewModelScope.launch {
+//            flow.onEach {
+//                println("FLOW: $it is delivered")
+//            }.buffer()
+//                .collect {
+//                    println("FLOW: now eating $it")
+//                    delay(1500L)
+//                    println("FLOW: finish eating $it")
+//                }
+//
+//        }
+//    }
 
 
 

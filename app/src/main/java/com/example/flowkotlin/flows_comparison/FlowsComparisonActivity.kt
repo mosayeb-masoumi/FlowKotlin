@@ -52,7 +52,10 @@ class FlowsComparisonActivity : AppCompatActivity() {
         }
 
 
+
         subscribeToObservables()
+
+
     }
 
     /*** in live data if we rotate the screen the data won,t lost ***/
@@ -63,6 +66,8 @@ class FlowsComparisonActivity : AppCompatActivity() {
       // in fragment  viewModel.liveData.observe(viewLifecycleOwner)
         viewModel.liveData.observe(this){
             binding.txtLiveData.text = it
+
+//            Snackbar.make(binding.root , it , Snackbar.LENGTH_LONG).show()
         }
 
 
@@ -80,7 +85,7 @@ class FlowsComparisonActivity : AppCompatActivity() {
                 /** stateFlow emit value every time when screen rotate. but if screen not rotate and we press the button
                  * again the value would not emit the same behavior as liveData */
 
-                Snackbar.make(binding.root , "stateFlow" , Snackbar.LENGTH_LONG).show()
+//                Snackbar.make(binding.root , it , Snackbar.LENGTH_LONG).show()
 
             }
         }
@@ -99,7 +104,7 @@ class FlowsComparisonActivity : AppCompatActivity() {
         /** good to call api and for navigation to change fragments **/
         lifecycleScope.launchWhenCreated {
             viewModel.sharedFlow.collectLatest {
-                binding.txtStateFlow.text = it
+                binding.txtSharedFlow.text = it
                 Snackbar.make(binding.root , it , Snackbar.LENGTH_LONG).show()
 
             }

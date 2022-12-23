@@ -25,12 +25,17 @@ class ComparisonViewModel : ViewModel() {
 
 
 
+    var live =0
     fun triggerLiveData(){
-        _liveData.value = "LiveData"
+        live++
+        _liveData.value = "LiveData+$live"
     }
 
+
+    var state = 0
     fun triggerStateFlow(){
-        _stateFlow.value = "StateFlow"
+        state++
+        _stateFlow.value = "State Flow+$state"
     }
 
 
@@ -44,10 +49,16 @@ class ComparisonViewModel : ViewModel() {
          }
     }
 
+
+
+    var shared = 0
     fun triggerSharedFlow(){
 
+        shared++
+        val data = "sharedFlow+$shared"
+
         viewModelScope.launch {
-            _sharedFlow.emit("sharedFlow")
+            _sharedFlow.emit(data)
         }
     }
 }

@@ -8,6 +8,12 @@
     android:gravity="center"
     tools:context=".flow_operators.MainActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_startCountDown"
+        android:layout_marginTop="40dp"
+        android:text="btn start count down"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_stateflow"
+        android:layout_marginTop="40dp"
         android:text="btn stateflow"/>
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +37,7 @@
         android:id="@+id/txt_stateflow"
         android:textSize="20sp"
         android:textColor="#C60303"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
 
 </LinearLayout>

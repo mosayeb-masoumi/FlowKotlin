@@ -22,11 +22,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        CoroutineScope(Main).launch {
-            mainViewModel.countDownFlow.collect {
-                txt.text = it.toString()
+        btn_startCountDown.setOnClickListener {
+            CoroutineScope(Main).launch {
+                mainViewModel.countDownFlow.collect {
+                    txt.text = it.toString()
+                }
             }
         }
+
 
 
 
